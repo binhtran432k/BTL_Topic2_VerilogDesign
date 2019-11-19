@@ -1,4 +1,4 @@
-module MiniProjectTopic2(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7, LEDR, CLOCK_50, KEY, SW);
+module MiniProjectTopic2(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7, LEDR, CLOCK_50, KEY, SW); // Set-top Module
 	input CLOCK_50; // 1 Clock frequency 50_000_000 Hz
 	input [2:0] SW; // 3 Switch to perform special function
 	input [3:0] KEY; // 4 Push buttons to control the clock
