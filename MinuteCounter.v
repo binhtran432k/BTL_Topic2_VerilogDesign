@@ -1,45 +1,41 @@
-module MinuteCounter(minutes, clkHour, Clk, KEY, editCur, editMode, disMode);
-	output reg[5:0] minutes = 59;
-	output clkHour;
-	input [3:0] KEY;
-	input [2:0] editCur;
-	input editMode, Clk;
-	input [1:0] disMode;
+module MinuteCounter(minutes, ClkHour, ClkMinute, clk, KeyPlus, KeyMinus, reset, EditPos, EditMode, screen);
+	output reg[5:0] minutes;
+	output ClkHour;
+	input [2:0] EditPos;
+	input EditMode, clk, ClkMinute, KeyPlus, KeyMinus, reset;
+	input [1:0] screen;
 	
-	/*reg clkFake;
-	initial begin
-		minutes <= 59;
-		clkFake <= 0;
-	end*/
+	reg [2:0] mode;
 	
-	assign clkHour = minutes == 59? 1: 0;
+	assign ClkHour = EditMode == 1? ClkHour: minutes == 59? 1: 0;
 	
-	always @(negedge Clk, negedge KEY[2], negedge KEY[1]/*, negedge KEY[0]*/) begin
-		if(KEY[1] == 0) begin
-			if (editCur == 3 && disMode == 0 && editMode == 1) begin
-				minutes <= minutes % 10 == 9? minutes - 9: minutes + 1;
-			end
-			else if (editCur == 2 && disMode == 0 && editMode == 1) begin
-				minutes <= ((minutes - (minutes % 10)) / 10) % 10 == 5? minutes - 50: minutes + 10;
-			end
+	always @(posedge clk, posedge ClkMinute, negedge KeyPlus, negedge KeyMinus, negedge reset) begin
+		if(~reset) begin
+			minutes <= 0;
+			mode <= 0;
 		end
-		else if(KEY[2] == 0) begin
-			if (editCur == 3 && disMode == 0 && editMode == 1) begin
-				minutes <= minutes % 10 == 0? minutes + 9: minutes - 1;
-			end
-			else if (editCur == 2 && disMode == 0 && editMode == 1) begin
-				minutes <= ((minutes - (minutes % 10)) / 10) % 10 == 0? minutes + 50: minutes - 10;
-			end
+		else if(ClkMinute) begin
+			if(EditMode == 0) mode <= 5;
+			else mode <= 0;
 		end
-		/*else if(KEY[0] == 0) begin
-			if(disMode == 0 && editMode == 1) begin
-				minutes <= Clk == 0? (minutes == 0? 59: minutes - 1): minutes;
-			end
-		end*/
-		else if(Clk == 0) begin
-			if(editMode == 0) begin
-				minutes <= minutes == 59? 0: minutes + 1;
-			end
+		else if(~KeyPlus) begin
+			if (EditPos == 3 && screen == 0 && EditMode == 1) mode <= 1;
+			else if (EditPos == 2 && screen == 0 && EditMode == 1) mode <= 3;
+			else mode <= 0;
+		end
+		else if(~KeyMinus) begin
+			if (EditPos == 3 && screen == 0 && EditMode == 1) mode <= 2;
+			else if (EditPos == 2 && screen == 0 && EditMode == 1) mode <= 4;
+			else mode <= 0;
+		end
+		else begin
+			mode <= 0;
+			minutes <= mode == 5? (minutes == 59? 0: minutes + 1):
+						mode == 1? (minutes % 10 == 9? minutes - 9: minutes + 1):
+						mode == 2? (minutes % 10 == 0? minutes + 9: minutes - 1):
+						mode == 3? (minutes >= 50? minutes - 50: minutes + 10):
+						mode == 4? (minutes < 10? minutes + 50: minutes - 10):
+						minutes;
 		end
 	end
 	

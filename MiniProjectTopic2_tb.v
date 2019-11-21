@@ -1,6 +1,6 @@
 module MiniProjectTopic2_tb();
 	reg CLOCK_50;
-	reg [2:0] SW;
+	reg [17:0] SW;
 	reg [3:0] KEY;
 	wire [0:6] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7;
 	wire [2:0] LEDR;
@@ -31,88 +31,13 @@ module MiniProjectTopic2_tb();
 		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button
 		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button
 		*/
-		//SW[2] <= 1;
-		#20000 KEY[0] = 0; #10 KEY <= 4'b1111; // EditMode Button -> M07
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M06
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 9
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 2
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 3
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 2
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 3
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 4
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M05
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 5
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 4
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 5
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		/*#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 2
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 3
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 4
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 5*/
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M04
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 9
-		#2000 KEY[1] = 0; #10000 KEY <= 4'b1111; // + Button 0
-		/*#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 2
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 3
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 2
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		//#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 9
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M03
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 5
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		/*#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 2
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 3
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 4
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 5
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M02
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 4
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 5
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 4
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 5
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 6
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 7
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 8
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 9
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button 0
-		/*#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M00
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button P
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button A
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button P
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button A
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button P
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button A
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M07
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1
-		#2000 KEY[3] = 0; #10 KEY <= 4'b1111; // ChangeEdit Button -> M06
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 0
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 2
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button 1*/
+		SW[17] <= 0;#5 SW[17] <= 1;
+		/*KEY[0] = 0; #10 KEY <= 4'b1111; // EditMode Button
+		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button
 		#2000 KEY[0] = 0; #10 KEY <= 4'b1111; // EditMode Button
-		#2000 SW[0] <= 1; #2000 SW[0] <= 0;
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button m1
-		#2000 KEY[2] = 0; #10 KEY <= 4'b1111; // - Button m0
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button m1
-		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button m2
-		#3200 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button m0
-		#500 $stop; // 5_000_000 > 1Day
+		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button
+		#2000 KEY[1] = 0; #10 KEY <= 4'b1111; // + Button*/
+		#50000 $stop; // 5_000_000 > 1Day
 	end
 	always #10 CLOCK_50 = ~CLOCK_50;
 	bin2key bk0(KEY, KEYS);
