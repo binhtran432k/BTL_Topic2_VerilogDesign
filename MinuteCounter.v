@@ -9,7 +9,7 @@ module MinuteCounter(minutes, ClkHour, ClkMinute, clk, KeyPlus, KeyMinus, reset,
 	
 	assign ClkHour = EditMode == 1? ClkHour: minutes == 59? 1: 0;
 	
-	always @(posedge clk, posedge ClkMinute, negedge KeyPlus, negedge KeyMinus, negedge reset) begin
+	always @(posedge clk, negedge reset) begin
 		if(~reset) begin
 			minutes <= 0;
 			mode <= 0;

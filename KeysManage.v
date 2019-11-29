@@ -5,9 +5,9 @@ module KeysManage(EditMode, screen, EditPos, KeyPlus, KeyMinus, KeyEdit, KeySwi,
 	output reg [2:0] EditPos; // The current Position of edit value
 		
 	// Activate Edit mode
-	reg [2:0] mode;
+	reg [3:0] mode;
 	
-	always @(negedge KeyPlus, negedge KeyMinus, negedge KeySwi, posedge clk, negedge KeyEdit, negedge reset) begin
+	always @(posedge clk, negedge reset) begin
 		if(~reset) begin
 			screen <= 0;
 			EditMode <= 0;
@@ -15,10 +15,11 @@ module KeysManage(EditMode, screen, EditPos, KeyPlus, KeyMinus, KeyEdit, KeySwi,
 			mode <= 0;
 		end
 		else if(~KeyEdit) begin
-			if(screen == 0) mode <= 7; // KEY0 Activate Edit mode
+			if(screen == 0 || screen == 1) mode <= 7; // KEY0 Activate Edit mode
+			else mode <= 0;
 		end
 		else if(~KeySwi) begin
-			if (EditMode == 1) begin
+			if (EditMode == 1 && screen == 0) begin
 				if (Mode12t24 == 0) begin
 					if (SwiReverse == 0) mode <= 1;
 					else mode <= 2;
@@ -28,7 +29,12 @@ module KeysManage(EditMode, screen, EditPos, KeyPlus, KeyMinus, KeyEdit, KeySwi,
 					else mode <= 4;
 				end
 			end
+			else if (EditMode == 1 && screen == 1) begin
+				if (SwiReverse == 0) mode <= 8;
+				else mode <= 9;
+			end
 			else mode <= 0;
+			
 		end
 		else if(~KeyPlus) begin
 			if (EditMode == 0) mode <= 5;
@@ -41,18 +47,18 @@ module KeysManage(EditMode, screen, EditPos, KeyPlus, KeyMinus, KeyEdit, KeySwi,
 		else begin
 			mode <= 0;
 			case(mode)
-			1: EditPos <= (screen == 0 && EditPos == 5)? EditPos + 3: EditPos + 1;
-			2: EditPos <= (screen == 0 && EditPos == 0)? EditPos - 3: EditPos - 1;
-			3: EditPos <= (screen == 0 && (EditPos == 5 || EditPos == 0))? EditPos + 2: EditPos + 1;
-			4: EditPos <= (screen == 0 && (EditPos == 7 || EditPos == 2))? EditPos - 2: EditPos - 1;
+			1: EditPos <= EditPos == 5? 0: EditPos + 1;
+			2: EditPos <= EditPos == 0? 5: EditPos - 1;
+			3: EditPos <= (EditPos == 5 || EditPos == 0)? EditPos + 2: EditPos + 1;
+			4: EditPos <= (EditPos == 7 || EditPos == 2)? EditPos - 2: EditPos - 1;
 			5: screen <= (screen >= 2)? 0: screen + 1;
 			6: screen <= (screen == 0)? 2: screen - 1;
-			7: begin
-				EditMode <= EditMode + 1;
-				EditPos <= 0;
-			end
-			default: EditPos <= Mode12t24 == 1? ((screen == 0 && EditPos == 1)? 0: EditPos):
-												((screen == 0 && EditPos == 7)? 5: EditPos);
+			7: EditMode <= EditMode + 1;
+			8: EditPos <= EditPos == 7? 0: EditPos + 1;
+			9: EditPos <= EditPos == 0? 7: EditPos - 1;
+			default: EditPos <= EditMode == 1? (Mode12t24 == 1? ((screen == 0 && EditPos == 1)? 0: EditPos):
+												((screen == 0 && EditPos == 7)? 5: EditPos)):
+												0;
 			endcase
 		end
 	end
