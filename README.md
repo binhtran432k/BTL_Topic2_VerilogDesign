@@ -9,10 +9,9 @@ Manage all module: MainManager.v<br/>
 Screen 1 - The seconds, minutes, hours display (include SecondCounter.v, MinuteCounter.v, HourCounter.v, Clk24toClk12.v)<br/>
 Screen 2 - The days, months, years display (include DayCounter.v, MonthCounter.v, YearCounter.v, DayOfWeekCounter.v)<br/>
 Screen 3 - The time zone display (include TimeZoneMinutes.v, TimeZoneHours.v, TimeZonePlusMinus.v)<br/>
-Screen 4 - Manage Mode24t12 Signal (Mode24to12Signal.v)
+Screen 4 - Manage Mode24t12 Signal (Mode24to12Signal.v)<br/>
 <br/>
 Display 7-Segment module: HexDisp.v<br/>
-<br/>
 Manage signal of edit mode, screen, edit position: KeysManage.v<br/>
 Manage signal of switch reverse: SwitchReverseSignal.v<br/>
 Manage signal of reset: ResetSignal.v<br/>
