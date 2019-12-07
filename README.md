@@ -18,4 +18,4 @@ Manage signal of reset: ResetSignal.v<br/>
 For flicker effect when in edit mode: FlickerCounter.v<br/>
 <br/>
 Todo:<br/>
-- Read all file begin in file MiniProjectTopic2.v
+- Read all file begin at file MiniProjectTopic2.v
